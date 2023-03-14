@@ -1,10 +1,9 @@
 import codecs
 import streamlit as st
 import pandas as pd
-import numpy as np
-import os
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as px
+import plotly.express as px
+
 
 st.sidebar.image("logo.png")
 st.sidebar.title('Cars App')
@@ -75,13 +74,13 @@ if (st.sidebar.checkbox('Histograma')):
     st.pyplot(fig)
 
 #Grafica de dispersion
-if (st.sidebar.checkbox('Grafica de Dispersion')):
-    fig, ax = plt.subplots()
-    ax.scatter(data["Status"], data["Year"],s=5,c='r')
-    ax.set_xlabel("Estado")
-    ax.set_ylabel("Año")
-    ax.set_title("Grafica de los años con relacion al estado del auto")
-    st.pyplot(fig)
+#if (st.sidebar.checkbox('Grafica de Dispersion')):
+#    fig, ax = plt.subplots()
+#    ax.scatter(data["Status"], data["Year"],s=5,c='r')
+#    ax.set_xlabel("Estado")
+#    ax.set_ylabel("Año")
+#   ax.set_title("Grafica de los años con relacion al estado del auto")
+#    st.pyplot(fig)
 
 # Grafica de barras
 if (st.sidebar.checkbox('Grafica de barras')):
@@ -98,5 +97,22 @@ if (st.sidebar.checkbox('Grafica de barras')):
     st.header("Gráfico de Estado y Modelo de Autos")
     st.pyplot(fig)
 
+
+#Grafica de Scatter
+if (st.sidebar.checkbox('Grafica de Scatter')):
+    fig, ax = plt.subplots()
+
+    fig_distribution_scatter = px.scatter(data, 
+                                        x = "Price",
+                                        y = "Model",
+                                        size = "Year",
+                                        color = "Year",
+                                        title = "Grafica Scatter",
+                                        template = "plotly_white"
+                                        )
+    fig_distribution_scatter.update_layout(xaxis_title = 'Precio', yaxis_title='Modelo')
+    fig_distribution_scatter.update_layout(plot_bgcolor='rgba(0,0,0,0)')
+
+    st.plotly_chart(fig_distribution_scatter)
 
 
