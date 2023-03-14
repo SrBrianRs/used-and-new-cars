@@ -1,1 +1,7 @@
-plotty==5.13.1
+streamlit
+altair
+pandas
+numpy
+matplotlib
+seaborn
+plotty

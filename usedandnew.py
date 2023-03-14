@@ -94,7 +94,7 @@ if (st.sidebar.checkbox('Grafica de barras')):
     ax.set_xlabel("Estado")
     ax.set_ylabel("Año")
     ax.set_title('Estado vs. Año de los Autos')
-
+    ax.set_ylim([1950, ax.get_ylim()[1]])
     st.header("Gráfico de Estado y Modelo de Autos")
     st.pyplot(fig)
 
