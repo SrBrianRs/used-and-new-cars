@@ -29,7 +29,7 @@ def filtro_car(auto):
 
 
 # file_size = os.path.getsize('car_data.csv')
-data = cargar_datos(1000)
+data = cargar_datos(100000)
 
 
 def filtro_year(year):
@@ -66,11 +66,8 @@ if st.sidebar.checkbox('Mostrar todos los Autos'):
 # Histograma
 if (st.sidebar.checkbox('Histograma')):
     fig, ax = plt.subplots()
-
     ax.hist(data['Year'])
-
     st.header("Histograma del el año")
-
     st.pyplot(fig)
 
 #Grafica de dispersion
@@ -116,3 +113,15 @@ if (st.sidebar.checkbox('Grafica de Scatter')):
     st.plotly_chart(fig_distribution_scatter)
 
 
+
+# Grafica Nueva
+
+car_counts = data.groupby('Model').size().reset_index(name='Year')
+
+if st.sidebar.checkbox('Nueva grafica'):
+    st.markdown("Histograma para analizar cuantos autos por modelo hay por año")
+    fig_car = px.histogram(car_counts, 
+                               x='Model', 
+                               y='Year', 
+                               title='Número autos por año')
+    st.plotly_chart(fig_car, use_container_width=True)
